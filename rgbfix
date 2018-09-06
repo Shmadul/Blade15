@@ -1,0 +1,23 @@
+#!/bin/bash
+sudo apt-get install rpl
+echo "@shmadul's Blade Key Fixer"
+cd ~/.config/polychromatic/profiles
+echo "Select a Profile Patch" 
+PS3="Use number to select a file or 'exit' to cancel: "
+select profile in *.json
+do
+    if [[ "$REPLY" == exit ]]; then break; fi
+
+    if [[ "$profile" == "" ]]
+    then
+        echo "'$REPLY' is not a valid option"
+        continue
+    fi
+    break
+done
+echo "Enter RGB Code To Set Disabled Keys to (ie: 1, 2, 3):"
+read rgbc
+rgb=[$rgbc]
+rpl "[0, 0, 0]" "$rgb" $profile
+echo "Now go into Polychromatic Profile and click on your profile to reload it"
+echo "Thanks For the Support @shmadul 2018"
